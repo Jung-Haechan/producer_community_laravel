@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -17,8 +18,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('bootstrap/dist/css/bootstrap.css')}}">
+    @yield('css', '')
+
 </head>
-<body>
+<body style="background:#ddd">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm bg-dark">
             <div class="container">
@@ -38,11 +41,11 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" id="navbarDropdown">게시판</a>
                             <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light" href="">작곡게시판</a>
-                                <a class="dropdown-item text-light" href="">작사게시판</a>
-                                <a class="dropdown-item text-light" href="">보컬/악기게시판</a>
-                                <a class="dropdown-item text-light" href="">완성작게시판</a>
-                                <a class="dropdown-item text-light" href="">자유게시판</a>
+                                <a class="dropdown-item text-light" href="{{route('post.index')}}?board=composer_board">작곡게시판</a>
+                                <a class="dropdown-item text-light" href="{{route('post.index')}}?board=lyricist_board">작사게시판</a>
+                                <a class="dropdown-item text-light" href="{{route('post.index')}}?board=performer_board">보컬/악기게시판</a>
+                                <a class="dropdown-item text-light" href="{{route('post.index')}}?board=completed_board">완성작게시판</a>
+                                <a class="dropdown-item text-light" href="{{route('post.index')}}?board=free_board">자유게시판</a>
                             </ul>
                         </li>   
                         <li class="nav-item">
@@ -92,7 +95,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="min-height:500px;">
+        <main class="py-4 mx-auto my-4" style="min-height:500px; max-width:800px;">
             @yield('content')
         </main>
 
