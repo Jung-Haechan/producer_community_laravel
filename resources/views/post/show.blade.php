@@ -16,6 +16,7 @@
                 <div class='col-4'>조회수: {{$post['views_number']}}</div>
             </div>
             <div class='p-3' style="min-height: 400px">{{$post['content']}}</div>
+            @if(isset(Auth::user()->name) && Auth::user()->name===$post['author'])
             <div class="row">
                 <form action="{{route('post.destroy',$post['id'])}}" method='post'>
                     <div class="form-group">
@@ -30,36 +31,47 @@
                     </div>    
                 </form>
             </div>
+            @endif
             <div>
                 <div class='row bg-dark p-2 pl-3 text-light' style="border:1px solid #eee">다음글:&nbsp&nbsp
-                    <a href='board.php?board=composer_board&&post_num=' class="text-light"><strong>ㅋㅋ</strong></a></div>
+                    @foreach($post_next as $post_next_)
+                        <a href="{{route('post.show', $post_next_['id'])}}?board={{$board}}" class="text-light"><strong>{{$post_next_['title']}}</strong></a>
+                    @endforeach
+                </div>
                 <div class='row bg-dark p-2 pl-3 text-light'>이전글:&nbsp&nbsp
-                    <a href='board.php?board=composer_board&&post_num=112' class="text-light"><strong>저도 발라드 올려볼께요!</strong></a></div>
+                    @foreach($post_previous as $post_previous_)
+                        <a href="{{route('post.show', $post_previous_['id'])}}?board={{$board}}" class="text-light"><strong>{{$post_previous_['title']}}</strong></a>
+                    @endforeach
+                </div>
             </div>
-            <form action='reply_process.php' class="form-horizontal" method='post'>
+            <form action="{{route('reply.store')}}" class="form-horizontal" method='post'>
+                @csrf
                 <div class="form-group py-3 pb-5">
                     <label for="reply">댓글:</label>
-                    <textarea name='reply' id="reply" rows='5' class="form-control" required></textarea>
+                    <textarea name='content' id="reply" rows='5' class="form-control" required></textarea>
                     <button class="btn btn-dark mt-2" type='submit' style="float:right">댓글</button>
                     <input type='hidden' name='board' value='composer_board'>
-                    <input type='hidden' name='post_num' value='113'>
+                    <input type='hidden' name='post_id' value="{{$post['id']}}">
                 </div><hr>
             </form>
             <div class='replies'>
-                <div>
-                    <i class="pl-2"><strong>정해찬</strong> 님의 댓글</i>
-                    <div class="p-2 mt-2" style="background:#ddd">ㅋㅋㅋㅋㅋㅋㅋ
-                        <div class="text-right">2020-02-17</div>
+                @foreach($replies as $reply)
+                    <div>
+                        <i class="pl-2"><strong>{{$reply['author']}}</strong> 님의 댓글</i>
+                        @if(isset(Auth::user()->name) && Auth::user()->name===$reply['author'])
+                            <form action="{{route('reply.destroy', $reply['id'])}}" method="post" style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="reply_id" value="{{$reply['id']}}">
+                                <button type="submit" class="btn btn-sm btn-dark ml-3">삭제</button>
+                            </form>
+                        @endif
+                        <div class="p-2 mt-2" style="background:#ddd">{{$reply['content']}}
+                            <div class="text-right" style="font-size:13px;">{{$reply['created_at']}}</div>
+                        </div>
                     </div>
-                </div>
-                <hr>
-                <div>
-                    <i class="pl-2"><strong>정해찬</strong> 님의 댓글</i>
-                    <div class="p-2 mt-2" style="background:#ddd">ㅋㅋㅋㅋㅋㅋㅋ
-                        <div class="text-right" style="font-size:13px;">2020-02-17</div>
-                    </div>
-                </div>
-                <hr>
+                    <hr>
+                @endforeach
             </div>
         </div>
     </div>

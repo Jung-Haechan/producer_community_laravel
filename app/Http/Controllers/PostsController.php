@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Reply;
 use Auth;
 use Config;
 
 class PostsController extends Controller
 {
+    public function __construct() {
+        $this -> middleware('auth', ['except' => ['index', 'show']]);
+    }
     public function index()
     {   
         $board = $_GET['board'];
-        $posts = POST::where('board', $board)->orderBy('id', 'desc')->get();
+        $posts = POST::where('board', $board)->orderBy('id', 'desc')->paginate(15);
         return view('post/index', [
             'posts' => $posts,
             'board' => $board
@@ -39,9 +43,18 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
+        POST::where('id', $post['id'])->update([
+            'views_number' => $post['views_number'] + 1
+        ]);
+        $replies = REPLY::where('post_id', $post['id'])->latest()->get();
+        $post_next = POST::where('board', $post['board'])->where('id', '>', $post['id'])->limit(1)->get();
+        $post_previous = POST::where('board', $post['board'])->where('id', '<', $post['id'])->limit(1)->orderBy('id', 'desc')->get();
         return view('post/show', [
             'board' => $_GET['board'],
-            'post' => $post
+            'post' => $post,
+            'post_next' => $post_next,
+            'post_previous' => $post_previous,
+            'replies' => $replies
         ]);
     }
 
@@ -53,9 +66,15 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('post/edit', [
-            'post' => $post
-        ]);
+        if(Auth::user()->name === $post['author']) {
+            return view('post/edit', [
+                'post' => $post
+            ]);
+        }
+        else {
+            return redirect(route('post.show', $post['id'])."?board=".$post['board']);
+        }
+        
     }
 
     /**

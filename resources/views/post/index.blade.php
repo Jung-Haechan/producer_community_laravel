@@ -25,7 +25,12 @@
 
 @section('content')
     <div class="container-fluid">
-        <h2><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
+        <div class="row mb-2">
+            <h2 class="col-7"><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
+            <div class="col-5">
+                <a href="{{route('post.create')}}?board={{$board}}"><button class="btn btn-dark" style="float:right">글쓰기</button></a>
+            </div>
+        </div>
         <table class="table table-condensed table-striped" style="font-size:14px;">
             <thead class="bg-dark text-light">
                 <tr>
@@ -44,5 +49,10 @@
             @endforeach
             </tbody>
         </table>
+        @if($posts)
+            <div class="mx-auto mt-4" style="width:124px;">
+                {{ $posts->appends(['board' => $board])->links() }}
+            </div>
+        @endif
     </div>
 @endsection
