@@ -74,9 +74,9 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-light" href="">내정보</a>
-                                    <a class="dropdown-item text-light" href="">받은쪽지함</a>
-                                    <a class="dropdown-item text-light" href="">보낸쪽지함</a>
-                                    <a class="dropdown-item text-light" href="">쪽지보내기</a>
+                                    <a class="dropdown-item text-light" href="{{route('mail.index')}}?mailbox=recieved">받은쪽지함</a>
+                                    <a class="dropdown-item text-light" href="{{route('mail.index')}}?mailbox=sent">보낸쪽지함</a>
+                                    <a class="dropdown-item text-light" href="{{route('mail.create')}}">쪽지보내기</a>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -95,9 +95,23 @@
             </div>
         </nav>
 
-        <main class="py-4 mx-auto my-4" style="min-height:500px; max-width:800px;">
-            @yield('content')
-        </main>
+        <section class="py-4" style="min-height:500px">
+            <div class="container py-4">
+                <div class="row">
+                    <article class="container col-lg-8">
+                            @yield('content')
+                    </article>
+                    <div class="col-lg-4 row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            베스트 게시물
+                        </div>
+                        <aside class="mx-auto bg-success col-12 col-md-6 col-lg-12" style="height:400px;">
+                            광고
+                        </aside>    
+                    </div>
+                </div>                   
+            </div>                
+        </section>
 
         <footer class="page-footer font-small p-4 bg-dark" style="color:#bbb">
             <div class="container">

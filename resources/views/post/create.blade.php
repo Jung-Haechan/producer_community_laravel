@@ -1,7 +1,6 @@
 @extends('layouts/app')
 
 @section('content')
-    <div class="p-4">
         <form enctype="multipart/form-data" action="{{route('post.store')}}" method="post">
             @csrf
             <div class="row">
@@ -12,11 +11,14 @@
                 <div class="form-group col-md-3">
                     <label for="board" class="sr-only">게시판</label>
                     <select id="board" name="board" class="form-control">
-                        <option value="composer_board">작곡 게시판</option>
-                        <option value="lyricist_board">작사 게시판</option>
-                        <option value="performer_board">보컬/악기 게시판</option>
-                        <option value="free_board">자유 게시판</option>
-                        <option value="completed_board">완성작 게시판</option>
+                        @foreach(config('objects.board') as $key => $value)
+                        <option value="{{$key}}" 
+                            @if($key==$_GET['board'])
+                                selected
+                            @endif
+                        > 
+                        {{$value}} 게시판</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -30,5 +32,4 @@
             </div>
             <button type="submit" class="btn btn-dark" style="float:right">제출</button>
         </form>
-    </div>
 @endsection

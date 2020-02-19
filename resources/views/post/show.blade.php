@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-    <div class="container">
         <h2><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
         <div class='container bg-white' style="border-radius:20px">
             <div class='p-3'><strong>제목: {{$post['title']}}</strong></div>
@@ -22,12 +21,12 @@
                     <div class="form-group">
                         @method('DELETE')
                         @csrf
-                        <button class="btn btn-dark ml-4" type='submit'>삭제</button>
+                        <button class="btn btn-sm btn-dark ml-4" type='submit'>삭제</button>
                     </div>                    
                 </form>
                 <form action="{{route('post.edit', $post['id'])}}" method='get'>
                     <div class="form-group">
-                        <button class="btn btn-dark ml-3" type='submit'>수정</button>
+                        <button class="btn btn-sm btn-dark ml-3" type='submit'>수정</button>
                     </div>    
                 </form>
             </div>
@@ -74,5 +73,4 @@
                 @endforeach
             </div>
         </div>
-    </div>
 @endsection

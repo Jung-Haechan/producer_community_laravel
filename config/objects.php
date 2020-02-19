@@ -13,7 +13,9 @@ return [
 
     'mailbox' => array(
         'recieved' => '받은',
-        'sent' => '보낸'
+        'sent' => '보낸',
+        'recieved_opposite' => '보낸',
+        'sent_opposite' => '받는'
     )
 
 ];

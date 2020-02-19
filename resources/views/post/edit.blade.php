@@ -1,7 +1,6 @@
 @extends('layouts/app')
 
 @section('content')
-    <div class="p-4">
         <form enctype="multipart/form-data" action="{{route('post.update',$post['id'])}}" method="post">
             @csrf
             @method('PUT')
@@ -19,5 +18,4 @@
             </div>
             <button type="submit" class="btn btn-dark" style="float:right">수정</button>
         </form>
-    </div>
 @endsection

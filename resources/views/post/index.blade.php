@@ -24,12 +24,12 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
         <div class="row mb-2">
             <h2 class="col-7"><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
-            <div class="col-5">
-                <a href="{{route('post.create')}}?board={{$board}}"><button class="btn btn-dark" style="float:right">글쓰기</button></a>
-            </div>
+            <form action="{{route('post.create')}}" method="get" class="col-5">
+                <input type="hidden" name="board" value="{{$board}}">
+                <button type="submit" class="btn btn-dark" style="float:right">글쓰기</button>
+            </form>
         </div>
         <table class="table table-condensed table-striped" style="font-size:14px;">
             <thead class="bg-dark text-light">
@@ -54,5 +54,4 @@
                 {{ $posts->appends(['board' => $board])->links() }}
             </div>
         @endif
-    </div>
 @endsection
