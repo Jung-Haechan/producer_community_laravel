@@ -14,7 +14,21 @@
                 <div class='col-4'>{{$post['created_at']}}</div>
                 <div class='col-4'>조회수: {{$post['views_number']}}</div>
             </div>
-            <div class='p-3' style="min-height: 400px">{{$post['content']}}</div>
+            <div class='p-3' style="min-height: 300px">
+                <div class="pb-3">{{$post['content']}}</div>
+            @if($post['file_type']==='audio')
+                <div class="mb-4 mx-auto" style="width:300px">
+                    <audio controls>
+                        <source src="{{$file}}">
+                    </audio>
+                </div>
+            @elseif($post['file_type']==='image')
+                <div class="mx-auto col-12 col-md-8">
+                    <img src="{{$file}}" alt="이미지" class="img-responsive mx-auto" style="width:100%">
+                </div>               
+            @endif
+            </div>
+                
             @if(isset(Auth::user()->name) && Auth::user()->name===$post['author'])
             <div class="row">
                 <form action="{{route('post.destroy',$post['id'])}}" method='post'>

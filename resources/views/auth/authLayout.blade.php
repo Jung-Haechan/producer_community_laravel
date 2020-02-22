@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 m-4">
+        <div class="col-md-10 m-4">
             <div class="card">
                 <div class="card-header text-light bg-dark ">@yield('card-header')</div>
                 <div class="card-body">

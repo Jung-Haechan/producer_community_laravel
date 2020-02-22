@@ -7,6 +7,7 @@ use App\Post;
 use App\Reply;
 use Auth;
 use Config;
+use Storage;
 
 class PostsController extends Controller
 {
@@ -36,7 +37,8 @@ class PostsController extends Controller
             'content' => $request->input('content'),
             'author' => Auth::user()->name,
             'board' => $request->input('board'),
-            'file' => $request->input('file')
+            'file' => $request->file->store('public'),
+            'file_type' => explode('/', $request->file->getMimeType())[0]
         ]);
         return redirect(route('post.index').'?board='.$board);
     }
@@ -46,6 +48,7 @@ class PostsController extends Controller
         POST::where('id', $post['id'])->update([
             'views_number' => $post['views_number'] + 1
         ]);
+        $file = Storage::url($post['file']);
         $replies = REPLY::where('post_id', $post['id'])->latest()->get();
         $post_next = POST::where('board', $post['board'])->where('id', '>', $post['id'])->limit(1)->get();
         $post_previous = POST::where('board', $post['board'])->where('id', '<', $post['id'])->limit(1)->orderBy('id', 'desc')->get();
@@ -54,7 +57,8 @@ class PostsController extends Controller
             'post' => $post,
             'post_next' => $post_next,
             'post_previous' => $post_previous,
-            'replies' => $replies
+            'replies' => $replies,
+            'file' => $file
         ]);
     }
 

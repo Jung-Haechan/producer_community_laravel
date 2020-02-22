@@ -81,11 +81,37 @@ class MailsController extends Controller
             MAIL::where('id', $mail['id'])->update([
                 'reciever_delete' => 1
             ]);
+            if($request->input('del')) {
+                foreach($request->input('del') as $del_mail) {
+                    MAIL::where('id', $del_mail['id'])->update([
+                        'reciever_delete' => 1
+                    ]);
+                }
+            }
         }
         elseif($mailbox==='sent') {
             MAIL::where('id', $mail['id'])->update([
                 'sender_delete' => 1
             ]);
+        }
+        return redirect(route('mail.index').'?mailbox='.$mailbox);
+    }
+    public function group_update(Request $request)
+    {
+        $mailbox = $_POST['mailbox'];
+        if($mailbox==='recieved') {
+            foreach($request->input('del') as $del_mail) {
+                MAIL::where('id', $del_mail)->update([
+                    'reciever_delete' => 1
+                ]);
+            }
+        }
+        elseif($mailbox==='sent') {
+            foreach($request->input('del') as $del_mail) {
+                MAIL::where('id', $del_mail)->update([
+                    'sender_delete' => 1
+                ]);
+            }
         }
         return redirect(route('mail.index').'?mailbox='.$mailbox);
     }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use Auth;
+use Congig;
 
 class HomeController extends Controller
 {
@@ -24,5 +27,17 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function mypage()
+    {
+        $myposts = POST::where('author', Auth::user()->name)->latest()->paginate(10);
+        $myposts_num = array();
+        foreach(config('objects.board') as $key => $value) {
+            $myposts_num[$key] = POST::where('author', Auth::user()->name)->where('board', $key)->count();               
+        }
+        return view('mypage', [
+            'myposts' => $myposts,
+            'myposts_num' => $myposts_num
+        ]);
     }
 }
