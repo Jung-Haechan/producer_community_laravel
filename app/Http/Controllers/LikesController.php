@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Post;
+use App\Like;
+use Auth;
+
+class LikesController extends Controller
+{
+    public function show(Post $post) {
+        $already_like = LIKE::where('post_id', $post['id'])->where('user_id', Auth::user()->id)->count();
+        $like_number = POST::where('id', $post['id'])->pluck('like_number');
+        return response()->json([
+            'already_like' => $already_like,
+            'like_number' => $like_number
+        ], 200);
+    }
+
+    public function like(Post $post) {
+        POST::where('id', $post['id'])->update([
+            'like_number' => $post['like_number'] + 1
+        ]);
+        LIKE::create([
+            'post_id' => $post['id'],
+            'user_id' => Auth::user()->id
+        ]);
+    }
+}

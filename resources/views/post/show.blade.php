@@ -28,6 +28,7 @@
                 </div>               
             @endif
             </div>
+            <like :post-id="{{$post['id']}}"></like>   
                 
             @if(isset(Auth::user()->name) && Auth::user()->name===$post['author'])
             <div class="row">
@@ -87,4 +88,5 @@
                 @endforeach
             </div>
         </div>
+        
 @endsection

@@ -11,6 +11,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/like/{post}', 'LikesController@show');
+Route::post('/like/{post}', 'LikesController@like');
 Route::resource('post', 'PostsController');
 
 Route::resource('reply', 'RepliesController')->only(['store', 'destroy']);
@@ -21,3 +23,5 @@ Route::resource('mail', 'MailsController')->except(['edit', 'destroy']);
 Route::get('storage/{board}/{file_name}', 'FilesController@show');
 
 Route::get('/mypage', 'HomeController@mypage')->name('mypage');
+
+

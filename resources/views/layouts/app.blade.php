@@ -128,9 +128,9 @@
             </div>
         </footer>
     </div>
-    <script src="{{ asset('jquery/dist/jquery.js') }}"></script>
-    <script src="{{ asset('popper.js/dist/popper.js') }}"></script>
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    
+
     
 </body>
 </html>
