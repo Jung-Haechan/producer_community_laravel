@@ -101,9 +101,9 @@
                     <article class="container col-xl-8">
                             @yield('content')
                     </article>
-                    <div class="col-xl-4 row">
-                        <div class="col-12 col-md-6 col-xl-12 bg-primary">
-                            베스트 게시물
+                    <div class="mx-auto col-xl-4 row">
+                        <div class="col-12 col-md-6 col-xl-12 mb-3" style="height:255px">
+                            <best></best>  
                         </div>
                         <aside class="mx-auto bg-success col-12 col-md-6 col-xl-12" style="height:400px;">
                             광고
