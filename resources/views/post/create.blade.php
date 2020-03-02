@@ -12,11 +12,11 @@
                     <label for="board" class="sr-only">게시판</label>
                     <select id="board" name="board" class="form-control">
                         @foreach(config('objects.board') as $key => $value)
-                        <option value="{{$key}}" 
-                            @if($key==$_GET['board'])
-                                selected
-                            @endif
-                        > 
+                            <option value="{{$key}}" 
+                                @if($key==$_GET['board'])
+                                    selected
+                                @endif
+                            > 
                         {{$value}} 게시판</option>
                         @endforeach
                     </select>

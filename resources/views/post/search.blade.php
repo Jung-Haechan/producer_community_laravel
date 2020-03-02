@@ -40,7 +40,15 @@
 
 @section('content')
         <div class="row mb-2">
-            <h2 class="col-7"><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
+            <h2 class="col-7">검색: {{$value}} - 
+            @if($board=='_board')
+                전체 게시판
+            @else
+                <a href="{{route('post.index')}}?board={{$board}}" class="text-dark">
+                    {{config('objects.board')[$board]}} 게시판
+                </a>
+            @endif 
+            </h2>
             <form action="{{route('post.create')}}" method="get" class="col-5">
                 <input type="hidden" name="board" value="{{$board}}">
                 <button type="submit" class="btn btn-dark" style="float:right">글쓰기</button>

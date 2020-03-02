@@ -14,6 +14,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/like/{post}', 'LikesController@show');
 Route::post('/like/{post}', 'LikesController@like');
 
+Route::post('/post/search', 'PostsController@search')->name('post.search');
 Route::resource('post', 'PostsController');
 
 Route::resource('reply', 'RepliesController')->only(['store', 'destroy']);

@@ -12,7 +12,7 @@ use Storage;
 class PostsController extends Controller
 {
     public function __construct() {
-        $this -> middleware('auth', ['except' => ['index', 'show']]);
+        $this -> middleware('auth', ['except' => ['index', 'show', 'search']]);
     }
     public function index()
     {   
@@ -36,10 +36,14 @@ class PostsController extends Controller
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'author' => Auth::user()->name,
-            'board' => $request->input('board'),
-            'file' => $request->file->store('public'),
-            'file_type' => explode('/', $request->file->getMimeType())[0]
+            'board' => $request->input('board')
         ]);
+        if($request->file) {
+            POST::create([
+                'file' => $request->file->store('public'),
+                'file_type' => explode('/', $request->file->getMimeType())[0]
+            ]);
+        }
         return redirect(route('post.index').'?board='.$board);
     }
 
@@ -108,5 +112,24 @@ class PostsController extends Controller
     {
         POST::where('id', $post['id'])->delete();
         return redirect(route('post.index').'?board='.$post['board']);
+    }
+
+    public function search(Request $request)
+    {   
+        $value = $request -> input('value');
+        $range = $request -> input('range');
+        $board = $request -> input('board');
+        if($range==='title_content') {
+            $posts = POST::where('board','like', '%'.$board)->where('title', 'like', '%'.$value.'%')->orWhere('content', 'like', '%'.$value.'%')->orderBy('id', 'desc')->paginate(15);
+        }
+        else {
+            $posts = POST::where('board','like', '%'.$board)->where($range, 'like', '%'.$value.'%')->orderBy('id', 'desc')->paginate(15);
+        }
+        return view('post/search',[
+            'posts' => $posts,
+            'value' => $value,
+            'range' => $range,
+            'board' => $board
+        ]);
     }
 }
