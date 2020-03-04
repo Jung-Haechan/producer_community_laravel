@@ -18,21 +18,32 @@
                 @endif
                 <div class='col-4'>{{$mail['created_at']}}</div>
             </div>
-            <div class='p-3' style="min-height: 400px">{{$mail['content']}}</div>
-            <div class="row">
-                <form action="{{route('mail.update', $mail['id'])}}" method='post'>
-                    <div class="form-group">
-                        @method('PUT')
-                        @csrf
-                        <input type="hidden" name="mailbox" value="{{$mailbox}}">
-                        <button class="btn btn-sm btn-dark ml-4" type='submit'>삭제</button>
-                    </div>                 
-                </form>
-                <form action="{{route('mail.create')}}" method='get'>
-                    <div class="form-group">
-                        <input type="hidden" name="reciever" value="{{$mail['sender']}}">
-                        <button class="btn btn-sm btn-dark ml-3" type='submit'>답장</button>
-                    </div>                 
-                </form>
+            <div class='p-3' style="min-height: 400px">{{$mail['content']}}
+                @if($mail['hall_of_fame'])
+                    @component('mail/hall_of_fame_form', [
+                        'hof_post' => $hof_post,
+                        'mail_id' => $mail['id']
+                    ])
+                    @endcomponent
+                @endif
+            </div>
+            @if($mail['hall_of_fame']===0)
+                <div class="row">
+                    <form action="{{route('mail.update', $mail['id'])}}" method='post'>
+                        <div class="form-group">
+                            @method('PUT')
+                            @csrf
+                            <input type="hidden" name="mailbox" value="{{$mailbox}}">
+                            <button class="btn btn-sm btn-dark ml-4" type='submit'>삭제</button>
+                        </div>                 
+                    </form>
+                    <form action="{{route('mail.create')}}" method='get'>
+                        <div class="form-group">
+                            <input type="hidden" name="reciever" value="{{$mail['sender']}}">
+                            <button class="btn btn-sm btn-dark ml-3" type='submit'>답장</button>
+                        </div>                 
+                    </form>
+                </div>
+            @endif
         </div>
 @endsection

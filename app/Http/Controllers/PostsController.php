@@ -32,16 +32,22 @@ class PostsController extends Controller
     public function store(Request $request)
     {   
         $board = $request->input('board');
-        POST::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'author' => Auth::user()->name,
-            'board' => $request->input('board')
-        ]);
         if($request->file) {
             POST::create([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'author' => Auth::user()->name,
+                'board' => $request->input('board'),
                 'file' => $request->file->store('public'),
                 'file_type' => explode('/', $request->file->getMimeType())[0]
+            ]);
+        }
+        else {
+            POST::create([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'author' => Auth::user()->name,
+                'board' => $request->input('board')
             ]);
         }
         return redirect(route('post.index').'?board='.$board);
@@ -66,12 +72,6 @@ class PostsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         if(Auth::user()->name === $post['author']) {
@@ -85,20 +85,22 @@ class PostsController extends Controller
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
-        POST::where('id', $post['id'])->update([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'file' => $request->input('file')
-        ]);
+        if($request->file) {
+            POST::where('id', $post['id'])->update([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'file' => $request->file->store('public'),
+                'file_type' => explode('/', $request->file->getMimeType())[0]
+            ]);
+        }
+        else {
+            POST::create([
+                'title' => $request->input('title'),
+                'content' => $request->input('content')
+            ]);
+        }
         return redirect(route('post.show', $post['id']).'?board='.$post['board']);
     }
 

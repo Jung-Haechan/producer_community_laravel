@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail;
 use App\User;
+use App\Post;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -63,14 +64,19 @@ class MailsController extends Controller
      */
     public function show(Mail $mail)
     {   
+        $hof_post = null;
         if($_GET['mailbox']==='recieved'){
             MAIL::where('id', $mail['id'])->update([
                 'read_check' => 1
             ]);
+            if($mail['hall_of_fame']!==0){
+                $hof_post = POST::find($mail['hall_of_fame']);
+            }
         }
         return view('mail/show', [
             'mail' => $mail,
-            'mailbox' => $_GET['mailbox']
+            'mailbox' => $_GET['mailbox'],
+            'hof_post' => $hof_post
         ]);
     }
 

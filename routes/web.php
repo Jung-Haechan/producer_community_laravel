@@ -28,3 +28,4 @@ Route::get('/mypage', 'HomeController@mypage')->name('mypage');
 
 Route::get('/best', 'BestController@index')->name('best.index');
 
+Route::resource('/hof', 'HofController')->only(['index', 'store', 'show']);

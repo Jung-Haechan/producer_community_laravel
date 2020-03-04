@@ -49,7 +49,7 @@
                             </ul>
                         </li>   
                         <li class="nav-item">
-                            <a href="#" class="nav-link">명예의전당</a>
+                            <a href="{{route('hof.index')}}" class="nav-link">명예의전당</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Q&A</a>
