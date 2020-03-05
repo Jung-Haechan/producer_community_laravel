@@ -15,7 +15,7 @@
                 <div class='col-4'>조회수: {{$post['views_number']}}</div>
             </div>
             <div class='p-3' style="min-height: 300px">
-                <div class="pb-3">{{$post['content']}}</div>
+                <div class="pb-3" style="white-space:pre-wrap;">{{$post['content']}}</div>
             @if($post['file_type']==='audio')
                 <div class="mb-4 mx-auto" style="width:300px">
                     <audio controls>
@@ -88,5 +88,6 @@
                 @endforeach
             </div>
         </div>
+        <a href="{{route('post.index')}}?board={{$board}}" class="btn btn-dark text-white">목록으로</a>
         
 @endsection

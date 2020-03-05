@@ -13,7 +13,7 @@ class BestController extends Controller
         $board = $_GET['board'];
         $i=0;
         foreach(config('objects.board') as $key => $value) {
-            $best_posts[$i] = POST::where('board', $key)->orderBy('like_number', 'DESC')->limit(6)->get();
+            $best_posts[$i] = POST::where('board', $key)->orderBy('like_number', 'DESC')->limit(10)->get();
             $best_posts_korean[$i] = $value;
             $i=$i+1;
         }    

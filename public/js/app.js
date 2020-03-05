@@ -6595,7 +6595,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.list-striped li:nth-child(2n-1) {\n    background: #eee;\n}\n.best_move {\n    position: absolute;\n    height: 100%;\n    line-height: 255px;\n    font-size: 20px;\n    color: #fff;\n    background: rgba(0,0,0,0.3);\n    cursor: pointer;\n}\n.right {\n    right: 0;\n}\n.left {\n    left: 0;\n}\n", ""]);
+exports.push([module.i, "\n.list-striped li:nth-child(2n-1) {\n    background: #eee;\n}\n.best_move {\n    position: absolute;\n    height:100%;\n    font-size: 20px;\n    color: #fff;\n    background: rgba(0,0,0,0.3);\n    cursor: pointer;\n}\n.right {\n    right: 15px;\n}\n", ""]);
 
 // exports
 
@@ -38071,7 +38071,7 @@ var render = function() {
     "ul",
     {
       staticClass: "list-group list-striped",
-      staticStyle: { "font-size": "13px", height: "255px" }
+      staticStyle: { "font-size": "13px" }
     },
     [
       _c(
@@ -38108,7 +38108,7 @@ var render = function() {
       _c(
         "span",
         {
-          staticClass: "best_move left",
+          staticClass: "best_move left ",
           on: {
             click: function($event) {
               return _vm.moveBest("left")

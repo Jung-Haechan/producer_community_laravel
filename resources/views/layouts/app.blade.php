@@ -36,7 +36,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">소개</a>
+                        <a href="{{route('introduce')}}" class="nav-link">소개</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" id="navbarDropdown">게시판</a>
@@ -52,7 +52,7 @@
                             <a href="{{route('hof.index')}}" class="nav-link">명예의전당</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Q&A</a>
+                            <a href="{{route('qna.index')}}" class="nav-link">Q&A</a>
                         </li>
                             
                     </ul>
@@ -98,15 +98,19 @@
         <section class="py-4" style="min-height:500px">
             <div class="container py-4">
                 <div class="row">
-                    <article class="container col-xl-8">
+                    <article class="container col-xl-8 mb-5">
                             @yield('content')
                     </article>
                     <div class="mx-auto col-xl-4 row">
-                        <div class="col-12 col-md-6 col-xl-12 mb-3" style="height:255px">
+                        <div class="col-12 col-md-6 col-xl-12 mb-3">
                             <best></best>  
                         </div>
-                        <aside class="mx-auto bg-success col-12 col-md-6 col-xl-12" style="height:400px;">
-                            광고
+                        <aside class="mx-auto col-12 col-md-6 col-xl-12">
+                            <div class="ad">
+                                <a href="http://itempage3.auction.co.kr/DetailView.aspx?itemno=B658299283" target="blank">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFnWJ2Q8OPV3Q3KS-FDURW6LikaZO7MlZ_f6ADi8IFTSWeM_1t" class="col-12" alt="">
+                                </a>                                
+                            </div>
                         </aside>    
                     </div>
                 </div>                   
@@ -122,15 +126,14 @@
                     </div>
                         
                     <div class="col-4 text-center">
-                        <a style="color:#bbb" href="#">저작권정책 보기</a>
+                        <a style="color:#bbb" href="" data-target="#copyright" data-toggle="modal">저작권정책 보기</a>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
+    @component('copyright_modal')
+    @endcomponent
     <script src="{{ asset('js/app.js') }}"></script>
-    
-
-    
 </body>
 </html>

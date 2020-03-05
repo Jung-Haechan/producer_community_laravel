@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'introduce']);
     }
 
     /**
@@ -39,5 +39,9 @@ class HomeController extends Controller
             'myposts' => $myposts,
             'myposts_num' => $myposts_num
         ]);
+    }
+    public function introduce()
+    {
+        return view('introduce');    
     }
 }

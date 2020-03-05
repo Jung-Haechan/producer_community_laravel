@@ -22,4 +22,9 @@
             </div>
         @endforeach
     </div>
+    @if($hofs)
+        <div class="col-10">
+            {{ $hofs->links() }}
+        </div>
+    @endif
 @endsection
