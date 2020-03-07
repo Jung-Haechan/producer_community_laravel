@@ -32,7 +32,7 @@
                         <li class="list-group-item bg-dark text-light h6 m-0" >내정보</li>
                         <li class="list-group-item p-2" style="border:0">이름: <strong>{{Auth::user()->name}}</strong></li>
                         <li class="list-group-item p-2" style="border:0">이메일: <strong>{{Auth::user()->email}}</strong></li>
-                        <li class="list-group-item p-2" style="border:0"><a href="#" class="text-dark">비밀번호 변경하기</a></li>
+                        <li class="list-group-item p-2" style="border:0"><a href="{{route('password.request')}}" class="text-dark">비밀번호 변경하기</a></li>
                         <li class="list-group-item p-2" style="border:0">
                             <div class="row">
                                 <div class="col-4">

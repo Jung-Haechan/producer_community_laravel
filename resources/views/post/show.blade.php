@@ -8,7 +8,9 @@
 @section('content')
         <h2><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
         <div class='container bg-white' style="border-radius:20px">
-            <div class='p-3'><strong>제목: {{$post['title']}}</strong></div>
+            <div class='p-3'><strong>
+                <a href="{{route('post.show', $post['id'])}}?board={{$post['board']}}" class="text-dark">제목: {{$post['title']}}</a>
+            </strong></div>
             <div class='row bg-dark text-light p-2 ' style="font-size:12px;">
                 <div class='col-4'>By <strong>{{$post['author']}}</strong></div>
                 <div class='col-4'>{{$post['created_at']}}</div>
@@ -30,7 +32,7 @@
             </div>
             <like :post-id="{{$post['id']}}"></like>   
                 
-            @if(isset(Auth::user()->name) && Auth::user()->name===$post['author'])
+            @if(isset(Auth::user()->name) && Auth::user()->name===$post['author'] || Auth::user()->name==='운영자')
             <div class="row">
                 <form action="{{route('post.destroy',$post['id'])}}" method='post'>
                     <div class="form-group">
@@ -72,11 +74,12 @@
                 @foreach($replies as $reply)
                     <div>
                         <i class="pl-2"><strong>{{$reply['author']}}</strong> 님의 댓글</i>
-                        @if(isset(Auth::user()->name) && Auth::user()->name===$reply['author'])
+                        @if(isset(Auth::user()->name) && Auth::user()->name===$reply['author'] || Auth::user()->name==='운영자')
                             <form action="{{route('reply.destroy', $reply['id'])}}" method="post" style="display:inline">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="reply_id" value="{{$reply['id']}}">
+                                <input type='hidden' name='post_id' value="{{$post['id']}}">
                                 <button type="submit" class="btn btn-sm btn-dark ml-3">삭제</button>
                             </form>
                         @endif
@@ -89,5 +92,4 @@
             </div>
         </div>
         <a href="{{route('post.index')}}?board={{$board}}" class="btn btn-dark text-white">목록으로</a>
-        {{$post['replies_number']}}
 @endsection

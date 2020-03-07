@@ -24,7 +24,7 @@ class LikesController extends Controller
             MAIL::create([
                 'title' => '[운영자] 당신의 작품이 명예의전당 헌액 조건에 부합합니다!',
                 'content' => '축하드립니다! 아래의 형식을 작성해 주시면 명예의 전당에 올라갑니다!',
-                'sender' => '퍼뜩이',
+                'sender' => '운영자',
                 'reciever' => $post['author'],
                 'hall_of_fame' => $post['id']
             ]);

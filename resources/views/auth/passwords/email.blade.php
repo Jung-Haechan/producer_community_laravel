@@ -1,5 +1,5 @@
 @extends('auth.authLayout')
-@section('card-header', '패스워드 초기화')
+@section('card-header', '패스워드 변경')
 @section('card-body')
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -14,7 +14,11 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">이메일</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                @if($email)
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email }}" required autocomplete="email" readonly>
+                                @else
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                @endif
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

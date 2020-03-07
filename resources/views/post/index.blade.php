@@ -62,7 +62,14 @@
                 <tr>
                     <td class="mobile-hide">{{$post['id']}}</td>
                     <td>
-                        <div><a href="{{route('post.show', $post['id'])}}?board={{$board}}" class="text-dark">{{$post['title']}}</a></div>
+                        <div>
+                            <a href="{{route('post.show', $post['id'])}}?board={{$board}}" class="text-dark">
+                                {{$post['title']}}
+                                @if($post['replies_number'])
+                                    <span class="text-danger">[{{$post['replies_number']}}]</span>
+                                @endif
+                            </a>
+                        </div>
                         <div class="desktop-hide" style="font-size: 11px;">
                             <span class="desktop-hide pr-3">글쓴이:&nbsp{{$post['author']}}</span>
                             <span class="desktop-hide pr-3">날짜:&nbsp{{explode(' ', $post['created_at'])[0]}}</span>

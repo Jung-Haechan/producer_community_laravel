@@ -5,7 +5,7 @@
     <div class="container mt-4">
         <div class="row">
             <h4>훌륭하신 음악가 여러분! 기회의 땅에 오신 것을 환영합니다!</h4>
-            <p class="bg-white p-2" style="font-size:13px">
+            <p class="bg-white p-2" style="font-size:13px;">
                 안녕하세요, 개발자 퍼뜩입니다. 저는 여러분이 그동안 유명해지지 못한 이유 중 하나가 <strong>기회 부족</strong>이라고 생각합니다.
                 작곡가 여러분은 훌륭한 멜로디를 만들어도 노래를 불러줄 가수를 구하지 못했습니다.
                 작사가 여러분의 주옥같은 가사는 그동안 훌륭한 멜로디를 만나지 못했고요.
@@ -17,7 +17,7 @@
         <div class="row my-3">
             <div class="col-md-4">
                 <h4>작곡게시판</h4>
-                <p  style="font-size:13px">
+                <p style="font-size:13px">
                     <strong>작곡가 여러분은 작곡게시판에서 여러분의 노래를 들려주세요!</strong>
                     여러분이 올린 멜로디와 MR이 작사가에게 영감을 줄 수 있습니다.
                     아니면 작사가의 가사를 보고 작곡을 해서 올려도 좋고요.

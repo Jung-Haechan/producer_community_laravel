@@ -14,9 +14,10 @@ class RepliesController extends Controller
     }
     public function store(Request $request)
     {
-        $post = POST::find($_POST['post_id']);
+        $post = POST::where('id', $_POST['post_id']);
+        $post_get = $post->get(); 
         $post->update([
-            'replies_number' => $post['replies_number']+1
+            'replies_number' => $post_get[0]['replies_number'] + 1
         ]);
         Reply::create([
             'content' => $request -> input('content'),
@@ -34,6 +35,11 @@ class RepliesController extends Controller
      */
     public function destroy()
     {
+        $post = POST::where('id', $_POST['post_id']);
+        $post_get = $post->get(); 
+        $post->update([
+            'replies_number' => $post_get[0]['replies_number'] - 1
+        ]);
         REPLY::where('id', $_POST['reply_id'])->delete();
         return redirect()->back();
     }

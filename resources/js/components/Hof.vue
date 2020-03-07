@@ -12,8 +12,7 @@
             </div>
         </div>
 
-        <audio controls class="my-3" style="width:100%">
-            <source :src="'storage/'+ hofs[hofNum]['file_name'].split('/')[1]">
+        <audio :src="'storage/'+ hofs[hofNum]['file_name'].split('/')[1]" controls class="my-3" style="width:100%">
         </audio>
         <div style="font-size:14px; min-height: 100px">
             {{hofs[hofNum]['description']}}

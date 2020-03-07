@@ -59,7 +59,7 @@ class PostsController extends Controller
             'views_number' => $post['views_number'] + 1
         ]);
         $file = Storage::url($post['file']);
-        $replies = REPLY::where('post_id', $post['id'])->latest()->get();
+        $replies = REPLY::where('post_id', $post['id'])->get();
         $post_next = POST::where('board', $post['board'])->where('id', '>', $post['id'])->limit(1)->get();
         $post_previous = POST::where('board', $post['board'])->where('id', '<', $post['id'])->limit(1)->orderBy('id', 'desc')->get();
         return view('post/show', [
@@ -96,7 +96,7 @@ class PostsController extends Controller
             ]);
         }
         else {
-            POST::create([
+            POST::where('id', $post['id'])->update([
                 'title' => $request->input('title'),
                 'content' => $request->input('content')
             ]);

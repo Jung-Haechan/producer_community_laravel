@@ -35,10 +35,12 @@ class QnaController extends Controller
     public function update(Qna $qna, Request $req) {
         QNA::find($qna['id'])->update([
             'answer' => $req->input('answer')
-        ]); 
+        ]);
+        return redirect(route('qna.show', $qna['id'])); 
     }
     public function destroy(Qna $qna)
     {
-        //
+        QNA::find($qna['id'])->delete();
+        return redirect(route('qna.index'));
     }
 }

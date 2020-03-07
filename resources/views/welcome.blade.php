@@ -19,12 +19,19 @@
                     @foreach($posts[$board] as $post)
                         <li class="list-group-item p-2 px-4" style="border:0">
                             <a href="{{route('post.show', $post['id'])}}?board={{$post['board']}}" class="text-dark">{{$post['title']}}</a>
+                            @if($post['replies_number'])
+                                <span class="text-danger">[{{$post['replies_number']}}]</span>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
             @endforeach
             <ul class="col-md-6 list-group">
-                <li class="list-group-item h6 bg-dark m-0 text-white">명예의전당</li>
+                <li class="list-group-item h6 bg-dark m-0 text-white">
+                    <a href="{{route('hof.index')}}" class="text-white">
+                        명예의전당
+                    </a>
+                </li>
                 <hof :hofs="{{$hofs}}"></hof>
             </ul>
         </div>

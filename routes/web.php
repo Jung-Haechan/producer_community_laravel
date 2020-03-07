@@ -26,6 +26,6 @@ Route::get('/best', 'BestController@index')->name('best.index');
 
 Route::get('/introduce', 'HomeController@introduce')->name('introduce');
 
-Route::resource('/hof', 'HofController')->only(['index', 'store', 'show']);
+Route::resource('/hof', 'HofController')->only(['index', 'store', 'destroy']);
 
 Route::resource('/qna', 'QnaController')->except(['edit']);

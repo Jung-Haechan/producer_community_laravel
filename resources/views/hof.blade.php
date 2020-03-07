@@ -10,7 +10,7 @@
                         <source src="{{Storage::url($hof['file_name'])}}">
                     </audio>
                 </div>
-                <div class="col-md-8 pt-2 pt-md-0">
+                <div class="col-md-6 pt-2 pt-md-0">
                     <h6>제목: {{$hof['title']}}</h6>
                     <p style="font-size:12px">{{$hof['description']}}</p>
                     <div style="font-size:12px">
@@ -19,6 +19,14 @@
                         <span> 보컬/악기: {{$hof['performer']}}</span>
                     </div>
                 </div>
+                @if(isset(Auth::user()->name) && Auth::user()->name==='운영자')
+                    <form action="{{route('hof.destroy', $hof['id'])}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-dark mt-2" style="height: 40px;">삭제</button>
+                    </form>
+                @endif
+
             </div>
         @endforeach
     </div>

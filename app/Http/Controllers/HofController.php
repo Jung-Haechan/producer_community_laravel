@@ -21,7 +21,7 @@ class HofController extends Controller
             'content' => '귀하의 작품이 명예의 전당에 헌액되었습니다!',
             'hall_of_fame' => 0
         ]);
-        return redirect(route('post.index').'?board=composer_board');
+        return redirect(route('hof.index'));
     }
 
     public function index()
@@ -30,5 +30,9 @@ class HofController extends Controller
         return view('hof', [
             'hofs' => $hofs
         ]);
+    }
+    public function destroy(Hof $hof) {
+        HOF::find($hof['id'])->delete();
+        return redirect(route('hof.index'));
     }
 }

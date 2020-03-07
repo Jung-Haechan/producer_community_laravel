@@ -2034,7 +2034,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     hofs: {
@@ -38320,21 +38319,14 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "audio",
-        {
-          staticClass: "my-3",
-          staticStyle: { width: "100%" },
-          attrs: { controls: "" }
-        },
-        [
-          _c("source", {
-            attrs: {
-              src: "storage/" + _vm.hofs[_vm.hofNum]["file_name"].split("/")[1]
-            }
-          })
-        ]
-      ),
+      _c("audio", {
+        staticClass: "my-3",
+        staticStyle: { width: "100%" },
+        attrs: {
+          src: "storage/" + _vm.hofs[_vm.hofNum]["file_name"].split("/")[1],
+          controls: ""
+        }
+      }),
       _vm._v(" "),
       _c(
         "div",
