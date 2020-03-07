@@ -89,5 +89,5 @@
             </div>
         </div>
         <a href="{{route('post.index')}}?board={{$board}}" class="btn btn-dark text-white">목록으로</a>
-        
+        {{$post['replies_number']}}
 @endsection

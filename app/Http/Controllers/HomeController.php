@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Hof;
+use Storage;
 use Auth;
 use Congig;
 
@@ -16,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'introduce']);
+        $this->middleware('auth', ['only' => 'mypage']);
     }
 
     /**
@@ -26,7 +28,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = [];
+        foreach(config('objects.board') as $key => $value) {
+            $posts[$key] = POST::where('board', $key)->orderBy('id', 'DESC')->limit(6)->get();
+        }
+        $hofs = HOF::orderBy('id', 'desc')->limit(8)->get();
+        $hofs_files = [];
+        $i = 0;
+        foreach($hofs as $hof) {
+            $hof_files[$i] = Storage::url($hof['file_name']);
+            $i++;
+        }    
+        return view('welcome', [
+            'posts' => $posts,
+            'hofs' => $hofs,
+            'hof_files' => $hof_files
+        ]);
     }
     public function mypage()
     {

@@ -3,13 +3,9 @@
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/like/{post}', 'LikesController@show');
 Route::post('/like/{post}', 'LikesController@like');
