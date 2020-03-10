@@ -14,7 +14,8 @@
             @foreach(config('objects.board') as $board => $board_korean)
                 <ul class="list-group list-striped col-md-6 mb-3" style="font-size: 13px">
                     <li class="list-group-item bg-dark text-white h6 m-0">
-                        <a href="{{route('post.index')}}?board={{$board}}" class="text-white">{{$board_korean}}게시판</a>
+                        {{$board_korean}}게시판
+                        <span style="float:right"><a href="{{route('post.index')}}?board={{$board}}" class="text-white">+</a></span>
                     </li>
                     @foreach($posts[$board] as $post)
                         <li class="list-group-item p-2 px-4" style="border:0">
@@ -28,9 +29,8 @@
             @endforeach
             <ul class="col-md-6 list-group">
                 <li class="list-group-item h6 bg-dark m-0 text-white">
-                    <a href="{{route('hof.index')}}" class="text-white">
-                        명예의전당
-                    </a>
+                    명예의전당
+                    <span style="float:right"><a href="{{route('hof.index')}}" class="text-white">+</a></span>
                 </li>
                 <hof :hofs="{{$hofs}}"></hof>
             </ul>

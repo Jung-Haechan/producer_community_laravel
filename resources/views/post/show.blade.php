@@ -30,9 +30,12 @@
                 </div>               
             @endif
             </div>
-            <like :post-id="{{$post['id']}}"></like>   
+                <like :post-id="{{$post['id']}}" :is-logged-in=
+                @auth 1 @endauth
+                @guest 0 @endguest  
+                ></like>   
                 
-            @if(isset(Auth::user()->name) && Auth::user()->name===$post['author'] || Auth::user()->name==='운영자')
+            @if(Auth::check() && (Auth::user()->name===$post['author'] || Auth::user()->name==='운영자'))
             <div class="row">
                 <form action="{{route('post.destroy',$post['id'])}}" method='post'>
                     <div class="form-group">
@@ -74,7 +77,7 @@
                 @foreach($replies as $reply)
                     <div>
                         <i class="pl-2"><strong>{{$reply['author']}}</strong> 님의 댓글</i>
-                        @if(isset(Auth::user()->name) && Auth::user()->name===$reply['author'] || Auth::user()->name==='운영자')
+                        @if(Auth::check() && (Auth::user()->name===$reply['author'] || Auth::user()->name==='운영자'))
                             <form action="{{route('reply.destroy', $reply['id'])}}" method="post" style="display:inline">
                                 @csrf
                                 @method('DELETE')

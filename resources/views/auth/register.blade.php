@@ -61,5 +61,8 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="text-right pt-4 text-danger">
+                            * 이메일을 허위로 작성 시 불이익이 있을 수 있습니다.
+                        </div>
                     </form>
 @endsection

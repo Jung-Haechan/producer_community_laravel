@@ -39,7 +39,7 @@ class HomeController extends Controller
             $hof_files[$i] = Storage::url($hof['file_name']);
             $i++;
         }    
-        return view('welcome', [
+        return view('index', [
             'posts' => $posts,
             'hofs' => $hofs,
             'hof_files' => $hof_files

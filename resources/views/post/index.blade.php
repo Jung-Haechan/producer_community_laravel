@@ -87,11 +87,11 @@
         </table>
         <div class="row">
         @if($posts)
-            <div class="col-10">
+            <div class="col-8">
                 {{ $posts->appends(['board' => $board])->links() }}
             </div>
         @endif
-            <div class="col-2">
+            <div class="col-4">
                 <button class="btn btn-dark" data-target="#search" data-toggle="modal" style="float:right">검색</button>
             </div>
         </div>

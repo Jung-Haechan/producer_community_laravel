@@ -61,10 +61,22 @@
                                 @endif
                                 <a href="{{route('mail.show', $mail['id'])}}?mailbox={{$mailbox}}" class="text-dark">{{$mail['title']}}</a>
                             </div>
-                            <span class="desktop-hide pr-3">{{config('objects.mailbox')[$mailbox.'_opposite']}}사람:&nbsp</span>
+                            <span class="desktop-hide pr-3">{{config('objects.mailbox')[$mailbox.'_opposite']}}사람:&nbsp
+                                @if($mailbox==='recieved')
+                                    {{$mail['sender']}}
+                                @elseif($mailbox==='sent')
+                                    {{$mail['reciever']}}
+                                @endif
+                            </span>
                             <span class="desktop-hide pr-3">날짜:&nbsp {{explode(' ', $mail['created_at'])[0]}}</span>
                         </td>
-                        <td class="mobile-hide">{{$mail['sender']}}</td>
+                        <td class="mobile-hide">
+                            @if($mailbox==='recieved')
+                                {{$mail['sender']}}
+                            @elseif($mailbox==='sent')
+                                {{$mail['reciever']}}
+                            @endif
+                        </td>
                         <td class="mobile-hide">{{explode(' ', $mail['created_at'])[0]}}</td>
                     </tr>
                 @endforeach

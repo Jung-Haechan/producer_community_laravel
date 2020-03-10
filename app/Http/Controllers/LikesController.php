@@ -11,7 +11,10 @@ use Auth;
 class LikesController extends Controller
 {
     public function show(Post $post) {
-        $already_like = LIKE::where('post_id', $post['id'])->where('user_id', Auth::user()->id)->count();
+        $already_like = 0;
+        if(Auth::check()) {
+            $already_like = LIKE::where('post_id', $post['id'])->where('user_id', Auth::user()->id)->count();
+        }
         $like_number = POST::where('id', $post['id'])->pluck('like_number');
         return response()->json([
             'already_like' => $already_like,

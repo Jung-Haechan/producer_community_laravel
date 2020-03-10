@@ -17,6 +17,10 @@ export default {
         postId: {
             type: Number,
             required: true
+        },
+        isLoggedIn: {
+            type: Number,
+            required: true
         }
     },
     data() {
@@ -36,9 +40,14 @@ export default {
     methods: {
         like() {
             if(!this.alreadyLike) {
-                axios.post('/like/' + this.postId, {});
-                this.likeNumber = this.likeNumber + 1;
-                this.alreadyLike = 1;
+                if(this.isLoggedIn) {
+                    axios.post('/like/' + this.postId, {});
+                    this.likeNumber = this.likeNumber + 1;
+                    this.alreadyLike = 1;
+                }
+                else {
+                    alert('로그인 후 이용 가능합니다.');
+                }
             }
             else {
                 alert('이미 좋아요를 누르셨습니다.');

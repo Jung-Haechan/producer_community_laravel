@@ -19,7 +19,7 @@
                         <span> 보컬/악기: {{$hof['performer']}}</span>
                     </div>
                 </div>
-                @if(isset(Auth::user()->name) && Auth::user()->name==='운영자')
+                @if(Auth::check() && Auth::user()->name==='운영자')
                     <form action="{{route('hof.destroy', $hof['id'])}}" method="post">
                         @csrf
                         @method('DELETE')

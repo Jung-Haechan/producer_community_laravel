@@ -32,13 +32,15 @@
     <div class="container bg-white mt-4" style="border-radius:6px">
         <div class="py-3 border-bottom"><strong>Q. {{$qna['title']}}</strong></div>
         <div class="py-3" style="min-height:200px">{{$qna['question']}}</div>
-        <form action="{{route('qna.destroy', $qna['id'])}}" method="post">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-dark mb-3">삭제</button>
-        </form>
+        @if(Auth::check()&&Auth::user()->name==='운영자')
+            <form action="{{route('qna.destroy', $qna['id'])}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-dark mb-3">삭제</button>
+            </form>
+        @endif
     </div>
-    @if(!$qna['answer']&&isset(Auth::user()->name)&&Auth::user()->name==='운영자')
+    @if(!$qna['answer']&&Auth::check()&&Auth::user()->name==='운영자')
         <form action="{{route('qna.update', $qna['id'])}}" method="post">
             @csrf
             @method('PUT')
