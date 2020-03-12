@@ -11,6 +11,7 @@ class BestController extends Controller
     public function index() {
         $best_posts = [];
         $board = $_GET['board'];
+        // 각 게시판을 배열에 담아 숫자로 표현하고, 각 게시판 배열에 게시글 배열을 담는다.  
         $i=0;
         foreach(config('objects.board') as $key => $value) {
             $best_posts[$i] = POST::where('board', $key)->orderBy('like_number', 'DESC')->limit(10)->get();

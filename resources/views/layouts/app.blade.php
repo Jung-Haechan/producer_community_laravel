@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>노래랑놀래</title>
+    <title>음악 협업 커뮤니티, {{config('app.name')}}</title>
 
     
 
@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm bg-dark">
             <div class="container">
                 <a class="navbar-brand" style="color:pink" href="{{ url('/') }}">
-                    노래랑놀래
+                    {{config('app.name')}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
