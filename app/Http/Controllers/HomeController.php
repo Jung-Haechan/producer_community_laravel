@@ -36,7 +36,7 @@ class HomeController extends Controller
         $hofs = HOF::orderBy('id', 'desc')->limit(8)->get();
         // 명예의전당 게시글을 배열에 담아 숫자로 표시
         // (좌우로 넘길 때 알고리즘을 쉽게 하기 위함)
-        $hofs_files = [];
+        $hof_files = [];
         $i = 0;
         foreach($hofs as $hof) {
             $hof_files[$i] = Storage::url($hof['file_name']);
