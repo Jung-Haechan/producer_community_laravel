@@ -34,20 +34,20 @@
         }
     }
 
-        
+
     </style>
 @endsection
 
 @section('content')
         <div class="row mb-2">
-            <h2 class="col-7">검색: {{$value}} - 
+            <h2 class="col-7">검색: {{$value}} -
             @if($board=='_board')
                 전체 게시판
             @else
                 <a href="{{route('post.index')}}?board={{$board}}" class="text-dark">
                     {{config('objects.board')[$board]}} 게시판
                 </a>
-            @endif 
+            @endif
             </h2>
             <form action="{{route('post.create')}}" method="get" class="col-5">
                 <input type="hidden" name="board" value="{{$board}}">
@@ -70,7 +70,7 @@
                 <tr>
                     <td class="mobile-hide">{{$post['id']}}</td>
                     <td>
-                        <div><a href="{{route('post.show', $post['id'])}}?board={{$board}}" class="text-dark">{{$post['title']}}</a></div>
+                        <div><a href="{{route('post.show', $post['id'])}}" class="text-dark">{{$post['title']}}</a></div>
                         <div class="desktop-hide" style="font-size: 11px;">
                             <span class="desktop-hide pr-3">글쓴이:&nbsp{{$post['author']}}</span>
                             <span class="desktop-hide pr-3">날짜:&nbsp{{explode(' ', $post['created_at'])[0]}}</span>

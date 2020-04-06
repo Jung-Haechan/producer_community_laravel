@@ -16,6 +16,11 @@
                 <label for="content sr-only" style="display:none">파일</label>
                 <input type="file" style="border:inherit" name="file" id="file">
             </div>
+            @if($post->file)
+                <div class="text-success">
+                    현재 설정된 파일은 {{$post->file}}입니다.
+                </div>
+            @endif
             <button type="submit" class="btn btn-dark" style="float:right">수정</button>
         </form>
 @endsection

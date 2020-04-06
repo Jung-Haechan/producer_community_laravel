@@ -19,7 +19,7 @@
                     </li>
                     @foreach($posts[$board] as $post)
                         <li class="list-group-item p-2 px-4" style="border:0">
-                            <a href="{{route('post.show', $post['id'])}}?board={{$post['board']}}" class="text-dark">{{$post['title']}}</a>
+                            <a href="{{route('post.show', $post['id'])}}" class="text-dark">{{$post['title']}}</a>
                             @if($post['replies_number'])
                                 <span class="text-danger">[{{$post['replies_number']}}]</span>
                             @endif

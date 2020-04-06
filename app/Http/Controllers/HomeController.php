@@ -41,7 +41,7 @@ class HomeController extends Controller
         foreach($hofs as $hof) {
             $hof_files[$i] = Storage::url($hof['file_name']);
             $i++;
-        }    
+        }
         return view('index', [
             'posts' => $posts,
             'hofs' => $hofs,
@@ -52,11 +52,11 @@ class HomeController extends Controller
     public function mypage()
     {
         // 내가 쓴 게시글 가져오기
-        $myposts = POST::where('author', Auth::user()->name)->latest()->paginate(10);
+        $myposts = POST::getMyList()->paginate(10);
         // 내가 쓴 게시글 수 가져오기
         $myposts_num = array();
         foreach(config('objects.board') as $key => $value) {
-            $myposts_num[$key] = POST::where('author', Auth::user()->name)->where('board', $key)->count();               
+            $myposts_num[$key] = POST::countMyList($key);
         }
         return view('mypage', [
             'myposts' => $myposts,
@@ -67,6 +67,6 @@ class HomeController extends Controller
     public function introduce()
     {
         //커뮤니티 소개
-        return view('introduce');    
+        return view('introduce');
     }
 }

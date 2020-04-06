@@ -34,7 +34,7 @@
         }
     }
 
-        
+
     </style>
 @endsection
 
@@ -63,7 +63,7 @@
                     <td class="mobile-hide">{{$post['id']}}</td>
                     <td>
                         <div>
-                            <a href="{{route('post.show', $post['id'])}}?board={{$board}}" class="text-dark">
+                            <a href="{{route('post.show', $post['id'])}}" class="text-dark">
                                 {{$post['title']}}
                                 @if($post['replies_number'])
                                     <span class="text-danger">[{{$post['replies_number']}}]</span>

@@ -6,10 +6,10 @@
 @endsection
 
 @section('content')
-        <h2><a href="{{route('post.index')}}?board={{$board}}" class="text-dark">{{config('objects.board')[$board]}}게시판</a></h2>
+        <h2><a href="{{route('post.index')}}?board={{$post['board']}}" class="text-dark">{{config('objects.board')[$post['board']]}}게시판</a></h2>
         <div class='container bg-white' style="border-radius:20px">
             <div class='p-3'><strong>
-                <a href="{{route('post.show', $post['id'])}}?board={{$post['board']}}" class="text-dark">제목: {{$post['title']}}</a>
+                <a href="{{route('post.show', $post['id'])}}" class="text-dark">제목: {{$post['title']}}</a>
             </strong></div>
             <div class='row bg-dark text-light p-2 ' style="font-size:12px;">
                 <div class='col-4'>By <strong>{{$post['author']}}</strong></div>
@@ -27,14 +27,14 @@
             @elseif($post['file_type']==='image')
                 <div class="mx-auto col-12 col-md-8">
                     <img src="{{$file}}" alt="이미지" class="img-responsive mx-auto" style="width:100%">
-                </div>               
+                </div>
             @endif
             </div>
                 <like :post-id="{{$post['id']}}" :is-logged-in=
                 @auth 1 @endauth
-                @guest 0 @endguest  
-                ></like>   
-                
+                @guest 0 @endguest
+                ></like>
+
             @if(Auth::check() && (Auth::user()->name===$post['author'] || Auth::user()->name==='운영자'))
             <div class="row">
                 <form action="{{route('post.destroy',$post['id'])}}" method='post'>
@@ -42,24 +42,24 @@
                         @method('DELETE')
                         @csrf
                         <button class="btn btn-sm btn-dark ml-4" type='submit'>삭제</button>
-                    </div>                    
+                    </div>
                 </form>
                 <form action="{{route('post.edit', $post['id'])}}" method='get'>
                     <div class="form-group">
                         <button class="btn btn-sm btn-dark ml-3" type='submit'>수정</button>
-                    </div>    
+                    </div>
                 </form>
             </div>
             @endif
             <div>
                 <div class='row bg-dark p-2 pl-3 text-light' style="border:1px solid #eee">다음글:&nbsp&nbsp
                     @foreach($post_next as $post_next_)
-                        <a href="{{route('post.show', $post_next_['id'])}}?board={{$board}}" class="text-light"><strong>{{$post_next_['title']}}</strong></a>
+                        <a href="{{route('post.show', $post_next_['id'])}}" class="text-light"><strong>{{$post_next_['title']}}</strong></a>
                     @endforeach
                 </div>
                 <div class='row bg-dark p-2 pl-3 text-light'>이전글:&nbsp&nbsp
                     @foreach($post_previous as $post_previous_)
-                        <a href="{{route('post.show', $post_previous_['id'])}}?board={{$board}}" class="text-light"><strong>{{$post_previous_['title']}}</strong></a>
+                        <a href="{{route('post.show', $post_previous_['id'])}}" class="text-light"><strong>{{$post_previous_['title']}}</strong></a>
                     @endforeach
                 </div>
             </div>
@@ -94,5 +94,5 @@
                 @endforeach
             </div>
         </div>
-        <a href="{{route('post.index')}}?board={{$board}}" class="btn btn-dark text-white">목록으로</a>
+        <a href="{{route('post.index')}}?board={{$post['board']}}" class="btn btn-dark text-white">목록으로</a>
 @endsection
